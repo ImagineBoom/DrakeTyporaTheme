@@ -16,6 +16,10 @@
  * GitHub https://github.com/liangjingkanji/DrakeTyporaTheme
  */
 @import url(./drake/font.css);
+
+/* 侧边栏 */
+@import "./drake/sidebar.css";
+
 @include-when-export url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
@@ -59,6 +63,7 @@
     --checkbox-unchecked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M810.667 213.333v597.334H213.333V213.333h597.334m0-85.333H213.333C166.4 128 128 166.4 128 213.333v597.334C128 857.6 166.4 896 213.333 896h597.334C857.6 896 896 857.6 896 810.667V213.333C896 166.4 857.6 128 810.667 128z' fill='%23333333'/%3E%3C/svg%3E");
 }
 
+
 html {
     font-size: var(--text-size);
 }
@@ -79,7 +84,7 @@ p {
 }
 
 #write {
-    background-image: linear-gradient(90deg, rgba(60, 10, 30, .04) 3%, transparent 0), linear-gradient(1turn, rgba(60, 10, 30, .04) 3%, transparent 0);
+    background-image: linear-gradient(90deg,rgba(60,10,30,.04) 3%,transparent 0),linear-gradient(1turn,rgba(60,10,30,.04) 3%,transparent 0);
     background-size: 20px 20px;
     background-position: 50%;
 }
@@ -93,7 +98,7 @@ p {
     background-color: var(--code-block-bg-color);
     color: var(--code-block-color);
     border: none;
-    line-height: var(--code-line-height);
+    line-height: var(--code-block-line-height);
 }
 .on-focus-mode .CodeMirror.cm-s-inner:not(.CodeMirror-focused) *,
 .on-focus-mode .md-fences.md-focus .CodeMirror-code > :not(.CodeMirror-activeline) *,
@@ -103,55 +108,14 @@ p {
 
 /*inline latex*/
 .MathJax {
-    font-size: 120% !important;
-}
-.MathJax text, .MathJax use {
-    font-family: var(--latex-font);
+  font-size: 120% !important;
 }
 /*math-block latex*/
 .md-math-block .MathJax {
-    font-size: 130% !important;
+  font-size: 130% !important;
 }
 
 /*mermaid*/
-[id^=mermaidChart] .cluster rect {
-    fill: var(--table-n2-bg-color) !important;
-    stroke: var(--table-border-color) !important;
-}
-[id^=mermaidChart] .clusters span.nodeLabel {
-    color: var(--text-color) !important;
-    line-height: 1.8rem;
-}
-[mermaid-type="journey"] line {
-    stroke: #7a7a7a !important;
-}
-[mermaid-type="journey"] .label {
-    color: #333 !important;
-}
-[id^=mermaidChart] .relationshipLabelBox {
-    fill: var(--bg-color) !important;
-    opacity: 1 !important;
-    background-color: var(--bg-color) !important;
-}
-[id^=mermaidChart] .legend {
-    fill: var(--text-color) !important;
-}
-[id^=mermaidChart] g.label {
-    font-size: 1rem !important;
-}
-[id^=mermaidChart] line.divider {
-    stroke: var(--table-border-color) !important;
-}
-[id^=mermaidChart] span.nodeLabel {
-    color: var(--code-block-color) !important;
-    line-height: 1.8rem;
-}
-tspan {
-    color: var(--text-color)
-}
-[id^=mermaidChart] .entityLabel {
-    fill: var(--code-block-color) !important;
-}
 [id^=mermaidChart] {
     fill: var(--text-color) !important;
 }
@@ -164,7 +128,7 @@ tspan {
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
 }
-.md-diagram-panel-preview .actor, .md-diagram-panel-preview .entityBox { /*方块*/
+.md-diagram-panel-preview .actor { /*方块*/
     stroke: var(--table-border-color) !important;
     fill: var(--code-block-bg-color) !important;
 }
@@ -222,8 +186,7 @@ pre.md-fences-advanced.md-focus .md-fences-adv-panel {
     fill: var(--bg-color) !important;
 }
 .md-diagram-panel-preview .edgeLabel span { /*条件文字*/
-    color: var(--text-color) !important;
-    background: var(--bg-color) !important;
+    color: var(--text-color);
 }
 .md-diagram-panel-preview .node rect,
 .md-diagram-panel-preview .node circle,
@@ -234,7 +197,7 @@ pre.md-fences-advanced.md-focus .md-fences-adv-panel {
     fill: var(--code-block-bg-color) !important;
 }
 #write .md-diagram-panel .md-diagram-panel-preview div { /*形状内文字*/
-    color: var(--code-block-color);
+    color: var(--code-block-color) !important;
     font-family: var(--text-font) !important;
     font-size: 1rem !important;
 }
@@ -341,12 +304,12 @@ img {
 }
 
 #write {
-    max-width: 1200px;
+    max-width: auto;
     margin: 0 auto;
-    padding: 20px 30px 100px;
+    padding: 20px 10px 100px;
 }
 #typora-source .CodeMirror-lines {
-    max-width: 1200px;
+    max-width: auto;
 }
 
 #write > ul:first-child,
@@ -390,9 +353,12 @@ h1 {
 
 h2 {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
 }
-
+h2 .md-plain {
+    padding-bottom: .3rem;
+    border-bottom: .2rem solid var(--h2-underline-color);
+    line-height: 3rem;
+}
 .on-focus-mode h2.md-end-block.md-heading:not(.md-focus):not(.md-focus-container):after {
     background-color: var(--blur-text-color) !important;
 }
@@ -534,11 +500,8 @@ ol:last-child {
     margin-bottom: 0;
 }
 
-.ty-table-edit {
-    margin-top: -1rem !important;
-}
-#write table {
-    margin-top: 1rem;
+table {
+    padding: 0;
     word-break: initial;
     background-color: var(--table-bg-color);
 }
@@ -599,6 +562,7 @@ kbd {
     font-size: .95rem;
     padding: .3em .4em;
     border-radius: .4em;
+    vertical-align: top;
     box-shadow: .1em .1em .2em rgba(0, 0, 0, 0.3);
 }
 
@@ -784,44 +748,6 @@ header,
 .megamenu-content,
 footer {
     font-family: initial;
-}
-
-/*sidebar*/
-.file-node-content:hover .file-node-icon,
-.file-node-content:hover .file-node-open-state {
-    visibility: visible;
-}
-.file-node-content {
-    display: flex;
-    align-items: center;
-}
-.file-node-open-state {
-    margin-right: .5rem;
-}
-.file-node-icon {
-    margin-right: .5rem;
-}
-
-#typora-sidebar {
-    font-size: inherit;
-    font-family: var(--title-font);
-}
-
-.sidebar-tabs {
-    border-bottom: none;
-}
-
-.file-list-item-summary, .file-list-item-parent-loc, .file-list-item-time, .file-list-item-summary {
-    font-size: 0.9rem !important;
-    font-family: var(--text-font);
-}
-
-.file-list-item-file-ext-part {
-    display: none;
-}
-
-.outline-item {
-    font-size: 1rem;
 }
 
 /*footnotes mark*/
@@ -1023,7 +949,7 @@ div.code-tooltip-content {
     border-radius: 6px;
 }
 .megamenu-menu-panel h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: left;
 }
 .megamenu-menu-panel h1, .megamenu-menu-panel h2 {
@@ -1177,7 +1103,6 @@ a.ty-link {
 }
 .cm-s-inner .CodeMirror-gutters {
     border-right: 1px solid rgba(120, 120, 120, 0.3);
-    background: var(--code-block-bg-color);
 }
 .cm-s-inner .CodeMirror-linenumber {
     color: #585b5d;
@@ -1200,7 +1125,4 @@ a.ty-link {
 }
 .cm-s-inner div.CodeMirror-cursor {
     border-left: 1px solid var(--code-block-color);
-}
-.cm-s-inner .cm-header, .cm-s-inner.cm-header {
-    color: #FFD760;
 }
